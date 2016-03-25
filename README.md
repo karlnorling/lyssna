@@ -1,33 +1,34 @@
-Welcome to Lyssna
+# Welcome to Lyssna
 =================
 
-Lyssna is a lambda (node/javascript) library that subscribes to codedeploy SNS events.
-Lyssna takes these events and matches them with provided notification channels, and sends these events to those notifications channels.
+## Lyssna is a lambda (node/javascript) library that subscribes to codedeploy SNS events.
 
-Supported notification channels:
-hipchat
-newrelic
-pagerduty
+## Lyssna takes these events and matches them with provided notification channels, and sends these events to those notifications channels.
 
-Upcoming notification channels:
-Bitrix24
-slack
-hall
-pie
-yammer
-fleep
-glitter
-glip
-ChatGrape
-flowdock
-asana
-jitsi
-Azendoo
+## Supported notification channels:
+ - hipchat
+ - newrelic
+ - pagerduty
 
-Upcoming integrations:
+## Upcoming notification channels:
+ - Bitrix24
+ - slack
+ - hall
+ - pie
+ - yammer
+ - fleep
+ - glitter
+ - glip
+ - ChatGrape
+ - flowdock
+ - asana
+ - jitsi
+ - Azendoo
+
+## Upcoming integrations:
 GitHub Api - getting more information based on the commit SHA - for deployment details.
 
-SNS codedeploy event json example:
+## SNS codedeploy event json example:
 ```json
 {
   "Records": [{
@@ -48,6 +49,34 @@ SNS codedeploy event json example:
       "MessageAttributes": {}
     }
   }]
+}
+```
+##Configuration
+```json
+Application Configuration example:
+{
+  "snsEventTriggers": {
+    "Name of your SNS event": {
+      "hipchat": {
+        "s3": {
+          "bucket": "s3.bucket/name",
+          "key": "path/to/file/in/s3.json"
+        }
+      },
+      "newrelic": {
+        "s3": {
+          "bucket": "s3.bucket/name",
+          "key": "path/to/file/in/s3.json"
+        }
+      },
+      "pagerduty": {
+        "s3": {
+          "bucket": "s3.bucket/name",
+          "key": "path/to/file/in/s3.json"
+        }
+      }
+    }
+  }
 }
 ```
 
