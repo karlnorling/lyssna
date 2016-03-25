@@ -85,7 +85,8 @@ Below is an example on how the config/app.json file might look.
 }
 ```
 
-Notification channel config example (to be stored in S3 encrypted bucket)
+#Notification channel config example (to be stored in S3 encrypted bucket)
+
 Example below is for hipchat notifications.
 ```json
 {
