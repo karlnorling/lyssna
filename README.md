@@ -39,6 +39,10 @@ How does one create the SNS triggers, instructions can be found [here](http://do
 -----
 GitHub Api - getting more information based on the commit SHA - for deployment details.
 
+### Upcoming features:
+-----
+Build system: Implement npm build to generate lambda function in aws, upload code to s3 and create sns topic/subscribors for applicaitons in CodeDeploy based on CloudFormation template.
+
 ### SNS CodeDeploy event
 -----
 Example:
