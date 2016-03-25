@@ -68,8 +68,8 @@ Example:
   }]
 }
 ```
-### Configuration
------
+## Configuration
+
 To setup the triggers for notifications we need to configure what sns events to trigger on.
 
 These json files are stored in [s3](https://aws.amazon.com/documentation/s3/). Location is based on configuration from config/app.json
@@ -102,7 +102,7 @@ Below is an example on how the config/app.json file might look.
 }
 ```
 
-###Notification channel config example (to be stored in S3 encrypted bucket)
+### Notification channel config example (to be stored in S3 encrypted bucket)
 -----
 Example below is for hipchat notifications.
 ```json
