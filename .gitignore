@@ -36,5 +36,8 @@ node_modules
 config/s3
 config/app.json
 
+# Test
+TEST.md
+
 # OSX
 .DS_Store
