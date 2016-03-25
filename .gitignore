@@ -31,3 +31,9 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# S3 Config files
+config/s3
+
+# OSX
+.DS_Store
