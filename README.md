@@ -10,6 +10,8 @@ How does it work?
 1. The CodeDeploy publishes deploy event to a sns topic.
 2. Subscibers to that event, in this case Lyssna lambda function - will execute.
 
+How does one create the SNS triggers, instructions can be found [here](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
+
 
 ### Supported notification channels:
 -----
@@ -65,6 +67,9 @@ Example:
 ##Configuration
 -----
 To setup the triggers for notifications we need to configure what sns events to trigger on.
+
+These json files are stored in [s3](https://aws.amazon.com/documentation/s3/). Location is based on configuration from config/app.json
+
 Below is an example on how the config/app.json file might look.
 ```json
 {
