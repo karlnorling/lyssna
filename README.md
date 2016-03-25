@@ -11,13 +11,13 @@ How does it work?
 2. Subscibers to that event, in this case Lyssna lambda function - will execute.
 
 
-Supported notification channels:
+### Supported notification channels:
 -----
  - hipchat
  - newrelic
  - pagerduty
 
-Upcoming notification channels:
+### Upcoming notification channels:
 -----
  - Bitrix24
  - slack
@@ -33,11 +33,12 @@ Upcoming notification channels:
  - jitsi
  - Azendoo
 
-Upcoming integrations:
+### Upcoming integrations:
 -----
 GitHub Api - getting more information based on the commit SHA - for deployment details.
 
-SNS codedeploy event json example:
+### SNS CodeDeploy event
+Example:
 ```json
 {
   "Records": [{
