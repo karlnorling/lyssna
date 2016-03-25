@@ -1,9 +1,15 @@
 # Welcome to Lyssna
 =================
 
-Lyssna is a lambda (node/javascript) library that subscribes to codedeploy SNS events.
+Lyssna is a lambda (node/javascript) library that subscribes to [CodeDeploy](https://aws.amazon.com/codedeploy/) [SNS](https://aws.amazon.com/documentation/sns/) events.
 
 Lyssna takes these events and matches them with provided notification channels, and sends these events to those notifications channels.
+
+How does it work?
+
+1. The CodeDeploy publishes deploy event to a sns topic.
+2. Subscibers to that event, in this case Lyssna lambda function - will execute.
+
 
 Supported notification channels:
 -----
