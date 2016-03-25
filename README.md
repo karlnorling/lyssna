@@ -1,4 +1,5 @@
 Welcome to Lyssna
+=================
 
 Lyssna is a lambda (node/javascript) library that subscribes to codedeploy SNS events.
 Lyssna takes these events and matches them with provided notification channels, and sends these events to those notifications channels.
@@ -27,7 +28,7 @@ Upcoming integrations:
 GitHub Api - getting more information based on the commit SHA - for deployment details.
 
 SNS codedeploy event json example:
-,,,
+```json
 {
   "Records": [{
     "EventSource": "aws:sns",
@@ -48,11 +49,11 @@ SNS codedeploy event json example:
     }
   }]
 }
-,,,
+```
 
 To setup the triggers for notifications we need to configure what sns events to trigger on.
 Below is an example on how the app.json file might look.
-,,,
+```json
 {
   "snsEventTriggers": {
     "BackOffice Notification": {
@@ -77,23 +78,70 @@ Below is an example on how the app.json file might look.
     }
   }
 }
-,,,
+```
 
 Notification channel config example (to be stored in S3 encrypted bucket)
 Example below is for hipchat notifications. (config/hipchat.json)
-,,,
+```json
 {
-  "apiKey": "xxxxxxxxxxxxxx",
+  "apiKey": "xxxxxxxxxxxxxxxx",
   "applications": [{
     "applicationName": "web-referral",
-    "roomIds": ["xxxxxx"],
+    "rooms": [{
+      "userName": "LambdaNotify",
+      "id": "xxxxxx"
+      }],
     "templates": {
-      "failed": "Deployment (%s) of %s to %s failed with error message \"%s\".",
-      "created": "Deployment (%s) of %s to %s has started.",
-      "succeeded": "Deployment (%s) of %s to %s was successful.",
-      "stopped": "Deployment (%s) of %s to %s has finished.",
-      "unknown": "Deployment (%s) of %s to %s with status %s."
+      "failed": "Deployment (%s) of %s with revision %s to %s failed with error message \"%s\".",
+      "created": "Deployment (%s) of %s with revision %s to %s has started.",
+      "succeeded": "Deployment (%s) of %s with revision %s to %s was successful.",
+      "stopped": "Deployment (%s) of %s with revision %s to %s has finished.",
+      "unknown": "Deployment (%s) of %s with revision %s to %s with status %s.",
+      "user": "Deployment by %s."
     }
   }]
 }
-,,,
+```
+Example below is for hipchat notifications. (config/newrelic.json)
+```json
+{
+  "apiKey": "xxxxxxxxxxxxxxxx",
+  "deploymentsApiUri": "https://api.newrelic.com/deployments.xml",
+  "applications": [{
+    "applicationName": "web-referral",
+    "applicationId": "xxxxxxxxxxxxxxxx",
+    "templates": {
+      "succeeded": "%s"
+    }
+  }]
+}
+```
+Example below is for pagerduty trigger. (config/pagerduty.json)
+```json
+{
+  "apiKey": "xxxxxxxxxxxxxxxx",
+  "pagerDutyApiUri": "https://events.pagerduty.com/generic/2010-04-15/create_event.json",
+  "applications": [
+    {
+      "applicationName": "web-referral",
+      "options": {
+        "service_key": "xxxxxxxxxxxxxxxx",
+        "event_type": "trigger",
+        "description": "",
+        "incident_key": "",
+        "client": "",
+        "client_url": "",
+        "details": {},
+        "contexts": [{
+          "type": "",
+          "href": "",
+          "text": ""
+        }]
+      },
+      "templates": {
+        "failed": "%s"
+      }
+    }
+  ]
+}
+```
