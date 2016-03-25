@@ -104,7 +104,7 @@ Below is an example on how the config/app.json file might look.
 
 #### Notification channel config example (to be stored in S3 encrypted bucket)
 -----
-Example below is for hipchat notifications.
+Example below is for hipchat notifications:
 ```json
 {
   "apiKey": "xxxxxxxxxxxxxxxx",
@@ -125,7 +125,7 @@ Example below is for hipchat notifications.
   }]
 }
 ```
-Example below is for hipchat notifications.
+Example below is for newrelic deployment recording:
 ```json
 {
   "apiKey": "xxxxxxxxxxxxxxxx",
@@ -139,7 +139,7 @@ Example below is for hipchat notifications.
   }]
 }
 ```
-Example below is for pagerduty trigger.
+Example below is for pagerduty trigger:
 ```json
 {
   "apiKey": "xxxxxxxxxxxxxxxx",
