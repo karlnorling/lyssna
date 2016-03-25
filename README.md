@@ -55,8 +55,10 @@ SNS codedeploy event json example:
 }
 ```
 ##Configuration
+
+To setup the triggers for notifications we need to configure what sns events to trigger on.
+Below is an example on how the config/app.json file might look.
 ```json
-Application Configuration example:
 {
   "snsEventTriggers": {
     "Name of your SNS event": {
@@ -83,37 +85,8 @@ Application Configuration example:
 }
 ```
 
-To setup the triggers for notifications we need to configure what sns events to trigger on.
-Below is an example on how the app.json file might look.
-```json
-{
-  "snsEventTriggers": {
-    "BackOffice Notification": {
-      "hipchat": {
-        "s3": {
-          "bucket": "com.gilt.lambda.backoffice",
-          "key": "codedeploy/notifications/config/hipchat.json"
-        }
-      },
-      "newrelic": {
-        "s3": {
-          "bucket": "com.gilt.lambda.backoffice",
-          "key": "codedeploy/notifications/config/newrelic.json"
-        }
-      },
-      "pagerduty": {
-        "s3": {
-          "bucket": "com.gilt.lambda.backoffice",
-          "key": "codedeploy/notifications/config/pagerduty.json"
-        }
-      }
-    }
-  }
-}
-```
-
 Notification channel config example (to be stored in S3 encrypted bucket)
-Example below is for hipchat notifications. (config/hipchat.json)
+Example below is for hipchat notifications.
 ```json
 {
   "apiKey": "xxxxxxxxxxxxxxxx",
@@ -134,7 +107,7 @@ Example below is for hipchat notifications. (config/hipchat.json)
   }]
 }
 ```
-Example below is for hipchat notifications. (config/newrelic.json)
+Example below is for hipchat notifications.
 ```json
 {
   "apiKey": "xxxxxxxxxxxxxxxx",
@@ -148,7 +121,7 @@ Example below is for hipchat notifications. (config/newrelic.json)
   }]
 }
 ```
-Example below is for pagerduty trigger. (config/pagerduty.json)
+Example below is for pagerduty trigger.
 ```json
 {
   "apiKey": "xxxxxxxxxxxxxxxx",
