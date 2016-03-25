@@ -33,7 +33,7 @@ node_modules
 .node_repl_history
 
 # S3 Config files
-config/s3
+config/s3/*
 config/app.json
 
 # Test

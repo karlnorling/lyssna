@@ -1,0 +1,24 @@
+{
+  "snsEventTriggers": {
+    "Name of your SNS event": {
+      "hipchat": {
+        "s3": {
+          "bucket": "s3.bucket/name",
+          "key": "path/to/file/in/s3.json"
+        }
+      },
+      "newrelic": {
+        "s3": {
+          "bucket": "s3.bucket/name",
+          "key": "path/to/file/in/s3.json"
+        }
+      },
+      "pagerduty": {
+        "s3": {
+          "bucket": "s3.bucket/name",
+          "key": "path/to/file/in/s3.json"
+        }
+      }
+    }
+  }
+}
