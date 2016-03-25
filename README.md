@@ -1,16 +1,18 @@
 # Welcome to Lyssna
 =================
 
-## Lyssna is a lambda (node/javascript) library that subscribes to codedeploy SNS events.
+Lyssna is a lambda (node/javascript) library that subscribes to codedeploy SNS events.
 
-## Lyssna takes these events and matches them with provided notification channels, and sends these events to those notifications channels.
+Lyssna takes these events and matches them with provided notification channels, and sends these events to those notifications channels.
 
-## Supported notification channels:
+Supported notification channels:
+-----
  - hipchat
  - newrelic
  - pagerduty
 
-## Upcoming notification channels:
+Upcoming notification channels:
+-----
  - Bitrix24
  - slack
  - hall
@@ -25,10 +27,11 @@
  - jitsi
  - Azendoo
 
-## Upcoming integrations:
+Upcoming integrations:
+-----
 GitHub Api - getting more information based on the commit SHA - for deployment details.
 
-## SNS codedeploy event json example:
+SNS codedeploy event json example:
 ```json
 {
   "Records": [{
