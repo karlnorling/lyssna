@@ -55,7 +55,7 @@ SNS codedeploy event json example:
 }
 ```
 ##Configuration
-
+-----
 To setup the triggers for notifications we need to configure what sns events to trigger on.
 Below is an example on how the config/app.json file might look.
 ```json
@@ -85,7 +85,7 @@ Below is an example on how the config/app.json file might look.
 }
 ```
 
-#Notification channel config example (to be stored in S3 encrypted bucket)
+###Notification channel config example (to be stored in S3 encrypted bucket)
 
 Example below is for hipchat notifications.
 ```json
