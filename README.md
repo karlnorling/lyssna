@@ -68,7 +68,7 @@ Example:
   }]
 }
 ```
-##Configuration
+### Configuration
 -----
 To setup the triggers for notifications we need to configure what sns events to trigger on.
 
