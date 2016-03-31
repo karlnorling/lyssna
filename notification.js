@@ -10,6 +10,7 @@ var appConfig = require('./config/app.json')
 var Promise = require('promise')
 
 exports.handler = function (event, context) {
+
   var getRevisionData = function (snsMessage) {
     var deploymentId = snsMessage.deploymentId
     var awsRequest = awsHelper.getDeploymentDetails(deploymentId)
@@ -48,7 +49,7 @@ exports.handler = function (event, context) {
 
   var parseS3Key = function (s3Location) {
     var re = /(\d+\.)?(\d+\.)?(\*|\d+)/
-    var str = 'web-referral/codedeploy-revisions/0.3.57.zip'
+    var str = s3Location
     var m
     var revision
 
