@@ -18,11 +18,11 @@ How does one create the SNS triggers, instructions can be found [here](http://do
  - hipchat
  - newrelic
  - pagerduty
+ - slack
 
 ### Upcoming notification channels:
 -----
  - Bitrix24
- - slack
  - hall
  - pie
  - yammer
@@ -166,5 +166,41 @@ Example below is for pagerduty trigger:
       }
     }
   ]
+}
+```
+```
+Example below is for slack notifications:
+```json
+{
+  "slackApi": {
+    "webhook": "https://hooks.slack.com/services/00000/0000000/XXXXXXXXXXXX"
+  },
+  "applications": [{
+    "applicationName": "web-referral",
+    "channels": [{
+      "username": "LambdaNotify",
+      "channel": "#channelName",
+      "icon_emoji": ":robot_face:"
+    }],
+    "templates": [{
+      "status": "failed",
+      "template": ":-1: Deployment (%s) of %s with revision %s to %s failed with error message \"%s\"."
+    }, {
+      "status": "created",
+      "template": ":wave: Deployment (%s) of %s with revision %s to %s has started."
+    }, {
+      "status": "succeeded",
+      "template": ":+1: Deployment (%s) of %s with revision %s to %s was successful."
+    }, {
+      "status": "stopped",
+      "template": ":ok_hand: Deployment (%s) of %s with revision %s to %s has finished."
+    }, {
+      "status": "unknown",
+      "template": ":question: Deployment (%s) of %s with revision %s to %s with status %s."
+    }, {
+      "status": "user",
+      "template": "Deployment by :bust_in_silhouette: %s."
+    }]
+  }]
 }
 ```
