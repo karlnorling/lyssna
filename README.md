@@ -38,7 +38,8 @@ GitHub Api - getting more information based on the commit SHA - for deployment d
 
 ### Upcoming features:
 -----
-Build system: Implement npm build to generate lambda function in aws, upload code to s3 and create sns topic/subscribors for applicaitons in CodeDeploy based on CloudFormation template.
+Build system: Implement npm build to generate lambda function in aws, upload lambda js code to configures [S3](https://aws.amazon.com/documentation/s3/) and create sns topic/subscribers for applicaitons in CodeDeploy based on CloudFormation template.
+Upload system: Upload application configuration and channel configuration files to configured [S3](https://aws.amazon.com/documentation/s3/) bucket in AWS
 
 ### SNS CodeDeploy event
 -----
@@ -99,7 +100,7 @@ Below is an example on how the config/app.json file might look.
 }
 ```
 
-#### Notification channel config example (to be stored in S3 encrypted bucket)
+#### Notification channel config example (to be stored in [S3](https://aws.amazon.com/documentation/s3/) encrypted bucket)
 -----
 Example below is for hipchat notifications:
 ```json
