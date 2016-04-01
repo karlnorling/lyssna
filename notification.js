@@ -6,11 +6,12 @@ var AwsLib = require('./lib/aws.js')
 var awsHelper = new AwsLib()
 var HipchatLib = require('./lib/hipchat.js')
 var NewrelicLib = require('./lib/newrelic.js')
+var PagerdutyLib = require('./lib/pagerduty.js')
+var SlackApi = require('./lib/slack.js')
 var appConfig = require('./config/app.json')
 var Promise = require('promise')
 
 exports.handler = function (event, context) {
-
   var getRevisionData = function (snsMessage) {
     var deploymentId = snsMessage.deploymentId
     var awsRequest = awsHelper.getDeploymentDetails(deploymentId)
@@ -107,7 +108,7 @@ exports.handler = function (event, context) {
           Promise.all([newrelicConfigPromise, revisionPromise]).then(function (values) {
             var newrelicApi = new NewrelicLib(values[0])
             var revision = getRevisionNumber(values[1], deploymentId)
-            var metaTagsPromise = getMetaTagsForS3Key(values[1], snsMessage, deploymentId)
+            var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
             metaTagsPromise.then(function (metaTags) {
               // Function call below can be a callback.
@@ -120,7 +121,25 @@ exports.handler = function (event, context) {
           })
           break
         case 'pagerduty':
-          // TODO - Need pagerduty lib
+          var pagerdutyConfigPromise = awsHelper.getNotificationConfig(channel.s3)
+
+          Promise.all([pagerdutyConfigPromise, revisionPromise]).then(function (values) {
+            var pagerdutyLib = new PagerdutyLib(values[0])
+            var revision = getRevisionNumber(values[1], deploymentId)
+            var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
+
+            metaTagsPromise.then(function (metaTags) {
+              // Function call below can be a callback.
+              pagerdutyLib.triggerPagerDutyAlert(sns, metaTags.user || '', revision)
+            }).catch(function (err) {
+              context.fail(util.format('Error: "%s"', err))
+            })
+          }).catch(function (err) {
+            context.fail(util.format('Error: "%s"', err))
+          })
+          break
+        case 'slack':
+
           break
         default:
           context.fail(util.format('Unsupported notification channel: %s', key))
