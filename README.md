@@ -168,7 +168,6 @@ Example below is for pagerduty trigger:
   ]
 }
 ```
-```
 Example below is for slack notifications:
 ```json
 {

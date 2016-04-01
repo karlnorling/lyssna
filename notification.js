@@ -7,7 +7,7 @@ var awsHelper = new AwsLib()
 var HipchatLib = require('./lib/hipchat.js')
 var NewrelicLib = require('./lib/newrelic.js')
 var PagerdutyLib = require('./lib/pagerduty.js')
-var SlackApi = require('./lib/slack.js')
+var SlackLib = require('./lib/slack.js')
 var appConfig = require('./config/app.json')
 var Promise = require('promise')
 
@@ -50,7 +50,7 @@ exports.handler = function (event, context) {
 
   var parseS3Key = function (s3Location) {
     var re = /(\d+\.)?(\d+\.)?(\*|\d+)/
-    var str = s3Location
+    var str = s3Location.key
     var m
     var revision
 
@@ -61,7 +61,7 @@ exports.handler = function (event, context) {
       revision = revision = m[0]
       return revision
     }
-    console.warn(util.format('No revision found for s3Location: "%s"', s3Location))
+    console.warn(util.format('No revision found for s3Location: "%s"', s3Location.key))
     return
   }
 
@@ -139,7 +139,22 @@ exports.handler = function (event, context) {
           })
           break
         case 'slack':
+          var slackConfigPromise = awsHelper.getNotificationConfig(channel.s3)
 
+          Promise.all([slackConfigPromise, revisionPromise]).then(function (values) {
+            var slackLib = new SlackLib(values[0])
+            var revision = getRevisionNumber(values[1], deploymentId)
+            var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
+
+            metaTagsPromise.then(function (metaTags) {
+              // Function call below can be a callback.
+              slackLib.postMessage(snsMessage, metaTags.user || '', revision)
+            }).catch(function (err) {
+              context.fail(util.format('Error: "%s"', err))
+            })
+          }).catch(function (err) {
+            context.fail(util.format('Error: "%s"', err))
+          })
           break
         default:
           context.fail(util.format('Unsupported notification channel: %s', key))
