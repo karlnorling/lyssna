@@ -15,25 +15,22 @@ How does one create the SNS triggers, instructions can be found [here](http://do
 
 ### Supported notification channels:
 -----
- - hipchat
- - newrelic
- - pagerduty
- - slack
+ - [hipchat](https://hipchat.com)
+ - [newrelic](https://newrelic.com)
+ - [pagerduty](https://pagerduty.com)
+ - [slack](https://slack.com)
 
 ### Upcoming notification channels:
 -----
- - Bitrix24
- - hall
- - pie
- - yammer
- - fleep
- - glitter
- - glip
- - ChatGrape
- - flowdock
- - asana
- - jitsi
- - Azendoo
+ - [jira](https://jira.com)
+ - [grove](https://grove.io)
+ - [Bitrix24](https://bitrix24.com)
+ - [yammer](https://www.yammer.com/)
+ - [fleep](https://fleep.io)
+ - [glitter](https://gitter.im/)
+ - [glip](https://glip.com)
+ - [ChatGrape](https://chatgrape.com/)
+ - [flowdock](https://www.flowdock.com/)
 
 ### Upcoming integrations:
 -----
