@@ -1,3 +1,16 @@
 {
-
+  "lambda": {
+    "s3": {
+      "bucket": "com.gilt.lambda.backoffice",
+      "key": "codedeploy/notifications/app"
+    },
+    "version": "0.0.1",
+    "description": "An Amazon SNS trigger that logs the message pushed to the SNS topic."
+    },
+  "configs": {
+    "s3": {
+      "bucket": "com.gilt.lambda.backoffice",
+      "key": "codedeploy/notifications/config"
+    }
+  }
 }

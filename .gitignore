@@ -36,6 +36,10 @@ node_modules
 config/s3/*
 config/app.json
 
+# Build config files
+build/config.json
+build/cloudformation.template
+
 # Test
 TEST.md
 
