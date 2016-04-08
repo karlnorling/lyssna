@@ -1,4 +1,4 @@
-console.log('Loading event')
+console.log('Lyssna: An Amazon SNS trigger that logs the message pushed to the SNS topic.')
 
 var _ = require('underscore')
 var util = require('util')
