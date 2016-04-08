@@ -1,14 +1,15 @@
 # Welcome to Lyssna
 =================
 
-Lyssna is a lambda (node/javascript) library that subscribes to [CodeDeploy](https://aws.amazon.com/codedeploy/) [SNS](https://aws.amazon.com/documentation/sns/) events.
+Lyssna is a [Lambda](https://aws.amazon.com/documentation/lambda/) (node/javascript) library that subscribes to [CodeDeploy](https://aws.amazon.com/codedeploy/) [SNS](https://aws.amazon.com/documentation/sns/) events.
 
 Lyssna takes these events and matches them with provided notification channels, and sends these events to those notifications channels.
 
 How does it work?
 
-1. The CodeDeploy publishes deploy event to a sns topic.
-2. Subscibers to that event, in this case Lyssna lambda function - will execute.
+1. The CodeDeploy publishes deploy event to a SNS topic.
+2. Subscibers to that SNS topic - in this case Lyssna Lambda function - will execute.
+3. During execution it looks at the SNS Event trigger name, SNS message application name and based on channel configurations sends a notification to these channels.
 
 How does one create the SNS triggers, instructions can be found [here](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
 
@@ -39,7 +40,7 @@ GitHub Api - getting more information based on the commit SHA - for deployment d
 ### Upcoming features:
 -----
 Build system: Implement npm build to generate lambda function in aws, upload lambda js code to configures [S3](https://aws.amazon.com/documentation/s3/) and create sns topic/subscribers for applicaitons in CodeDeploy based on CloudFormation template.
-Upload system: Upload application configuration and channel configuration files to configured [S3](https://aws.amazon.com/documentation/s3/) bucket in AWS
+Upload system: Upload application configuration and channel configuration files to configured S3 bucket in AWS
 
 ### SNS CodeDeploy event
 -----
@@ -70,7 +71,7 @@ Example:
 
 To setup the triggers for notifications we need to configure what sns events to trigger on.
 
-These json files are stored in [s3](https://aws.amazon.com/documentation/s3/). Location is based on configuration from config/app.json
+These json files are stored in S3. Location is based on configuration from config/app.json
 
 Below is an example on how the config/app.json file might look.
 ```json
@@ -100,7 +101,7 @@ Below is an example on how the config/app.json file might look.
 }
 ```
 
-#### Notification channel config example (to be stored in [S3](https://aws.amazon.com/documentation/s3/) encrypted bucket)
+#### Notification channel config example (to be stored in S3) encrypted bucket)
 -----
 Example below is for hipchat notifications:
 ```json
