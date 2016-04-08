@@ -3,7 +3,6 @@ console.log('Loading event')
 var _ = require('underscore')
 var util = require('util')
 var AwsLib = require('./lib/aws.js')
-var awsHelper = new AwsLib()
 var HipchatLib = require('./lib/hipchat.js')
 var NewrelicLib = require('./lib/newrelic.js')
 var PagerdutyLib = require('./lib/pagerduty.js')
@@ -12,6 +11,8 @@ var appConfig = require('./config/app.json')
 var Promise = require('promise')
 
 exports.handler = function (event, context) {
+  var awsHelper = new AwsLib(context)
+
   var getRevisionData = function (snsMessage) {
     var deploymentId = snsMessage.deploymentId
     var awsRequest = awsHelper.getDeploymentDetails(deploymentId)
