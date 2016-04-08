@@ -88,7 +88,7 @@ exports.handler = function (event, context) {
           var hipchatConfigPromise = awsHelper.getNotificationConfig(channel.s3)
 
           Promise.all([hipchatConfigPromise, revisionPromise]).then(function (values) {
-            var hipchatApi = new HipchatLib(values[0])
+            var hipchatApi = new HipchatLib(values[0], context)
             var revision = getRevisionNumber(values[1], deploymentId)
             var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
@@ -106,7 +106,7 @@ exports.handler = function (event, context) {
           var newrelicConfigPromise = awsHelper.getNotificationConfig(channel.s3)
 
           Promise.all([newrelicConfigPromise, revisionPromise]).then(function (values) {
-            var newrelicApi = new NewrelicLib(values[0])
+            var newrelicApi = new NewrelicLib(values[0], context)
             var revision = getRevisionNumber(values[1], deploymentId)
             var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
@@ -124,7 +124,7 @@ exports.handler = function (event, context) {
           var pagerdutyConfigPromise = awsHelper.getNotificationConfig(channel.s3)
 
           Promise.all([pagerdutyConfigPromise, revisionPromise]).then(function (values) {
-            var pagerdutyLib = new PagerdutyLib(values[0])
+            var pagerdutyLib = new PagerdutyLib(values[0], context)
             var revision = getRevisionNumber(values[1], deploymentId)
             var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
@@ -142,7 +142,7 @@ exports.handler = function (event, context) {
           var slackConfigPromise = awsHelper.getNotificationConfig(channel.s3)
 
           Promise.all([slackConfigPromise, revisionPromise]).then(function (values) {
-            var slackLib = new SlackLib(values[0])
+            var slackLib = new SlackLib(values[0], context)
             var revision = getRevisionNumber(values[1], deploymentId)
             var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
