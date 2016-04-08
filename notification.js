@@ -7,11 +7,13 @@ var HipchatLib = require('./lib/hipchat.js')
 var NewrelicLib = require('./lib/newrelic.js')
 var PagerdutyLib = require('./lib/pagerduty.js')
 var SlackLib = require('./lib/slack.js')
-var appConfig = require('./config/app.json')
 var Promise = require('promise')
+var appConfig = require('./config/app.json')
 
 exports.handler = function (event, context) {
   var awsHelper = new AwsLib(context)
+
+  console.log('Appconfig', appConfig)
 
   var getRevisionData = function (snsMessage) {
     var deploymentId = snsMessage.deploymentId
