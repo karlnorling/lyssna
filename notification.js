@@ -148,7 +148,7 @@ exports.handler = function (event, context) {
 
             metaTagsPromise.then(function (metaTags) {
               // Function call below can be a callback.
-              slackLib.postMessage(snsMessage, metaTags || '', revision)
+              slackLib.postMessage(snsMessage, metaTags.user || '', revision)
             }).catch(function (err) {
               context.fail(util.format('Error: "%s"', err))
             })
