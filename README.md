@@ -42,163 +42,27 @@ GitHub Api - getting more information based on the commit SHA - for deployment d
 Build system: Implement npm build to generate lambda function in aws, upload lambda js code to configures [S3](https://aws.amazon.com/documentation/s3/) and create sns topic/subscribers for applicaitons in CodeDeploy based on CloudFormation template.
 Upload system: Upload application configuration and channel configuration files to configured S3 bucket in AWS
 
-### SNS CodeDeploy event
+### SNS CodeDeploy event examples
 -----
-Example:
-```json
-{
-  "Records": [{
-    "EventSource": "aws:sns",
-    "EventVersion": "1.0",
-    "EventSubscriptionArn": "arn:aws:sns:us-east-1:905260852223:hipchat_notification:49343f9b-237f-4ff5-9e3f-0da23ffde19e",
-    "Sns": {
-      "Type": "Notification",
-      "MessageId": "45c8b1bf-9d80-5274-b22a-fedd5a1b48d1",
-      "TopicArn": "arn:aws:sns:us-east-1:905260852223:hipchat_notification",
-      "Subject": "unknown: AWS CodeDeploy d-KMJOV59NE in us-east-1 to web-referral",
-      "Message": "{\"region\":\"us-east-1\",\"accountId\":\"905260852223\",\"eventTriggerName\":\"BackOffice Notification\",\"applicationName\":\"web-referral\",\"deploymentId\":\"d-KMJOV59NE\",\"deploymentGroupName\":\"production\",\"createTime\":\"Wed Mar 16 02:30:50 UTC 2016\",\"completeTime\":null,\"status\":\"unknown\"}",
-      "Timestamp": "2016-03-16T02:30:51.405Z",
-      "SignatureVersion": "1",
-      "Signature": "Fc18UP+tJisMYmzuOjVtNN2t+qzVCrqgUq9EvUBY82NwMf0LgxlSp8FM9uxFQRnlJaahxDykUyPYPNHPmLcox5A13fiudw7miKYlKRaaKobmdPQoY+lVKvm6hBpq0CKUG64YUQgHeXDuk1mUqE0L+hxj9rqJc6yZdRL96KpNLnMX3VRKw8+WELgycjJsywbaSjFqdDm2cXv76Ngwq+blYkAP5uneIzVkCHvNMsqA0iRug3yTxonV+Soz9p5b+OzJw75SaYgJqWLaGneeYqck6Vun88etssdNpbaVV0iCR600JA+lhyP7py6ON9+Z5IUtnsESB0+YJ8L59Ycvn78B9A==",
-      "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem",
-      "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:905260852223:hipchat_notification:49343f9b-237f-4ff5-9e3f-0da23ffde19e",
-      "MessageAttributes": {}
-    }
-  }]
-}
-```
+ - (created)[https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-created.json]
+ - (succeeded)[https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-succeeded.json]
+ - (failed)[https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-failed.json]
+ - (stopped)[https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-stopped.json]
+
 ## Configuration
 
 To setup the triggers for notifications we need to configure what sns events to trigger on.
 
 These json files are stored in S3. Location is based on configuration from config/app.json
 
-Below is an example on how the config/app.json file might look.
-```json
-{
-  "snsEventTriggers": {
-    "Name of your SNS event": {
-      "hipchat": {
-        "s3": {
-          "bucket": "s3.bucket/name",
-          "key": "path/to/file/in/s3.json"
-        }
-      },
-      "newrelic": {
-        "s3": {
-          "bucket": "s3.bucket/name",
-          "key": "path/to/file/in/s3.json"
-        }
-      },
-      "pagerduty": {
-        "s3": {
-          "bucket": "s3.bucket/name",
-          "key": "path/to/file/in/s3.json"
-        }
-      }
-    }
-  }
-}
-```
+(Example of app configuration)[https://github.com/karlnorling/lyssna/blob/master/config/app-example.json]
+
 
 #### Notification channel config example (to be stored in S3) encrypted bucket)
 -----
-Example below is for hipchat notifications:
-```json
-{
-  "apiKey": "xxxxxxxxxxxxxxxx",
-  "applications": [{
-    "applicationName": "web-referral",
-    "rooms": [{
-      "userName": "LambdaNotify",
-      "id": "xxxxxx"
-      }],
-    "templates": {
-      "failed": "Deployment (%s) of %s with revision %s to %s failed with error message \"%s\".",
-      "created": "Deployment (%s) of %s with revision %s to %s has started.",
-      "succeeded": "Deployment (%s) of %s with revision %s to %s was successful.",
-      "stopped": "Deployment (%s) of %s with revision %s to %s has finished.",
-      "unknown": "Deployment (%s) of %s with revision %s to %s with status %s.",
-      "user": "Deployment by %s."
-    }
-  }]
-}
-```
-Example below is for newrelic deployment recording:
-```json
-{
-  "apiKey": "xxxxxxxxxxxxxxxx",
-  "deploymentsApiUri": "https://api.newrelic.com/deployments.xml",
-  "applications": [{
-    "applicationName": "web-referral",
-    "applicationId": "xxxxxxxxxxxxxxxx",
-    "templates": {
-      "succeeded": "%s"
-    }
-  }]
-}
-```
-Example below is for pagerduty trigger:
-```json
-{
-  "apiKey": "xxxxxxxxxxxxxxxx",
-  "pagerDutyApiUri": "https://events.pagerduty.com/generic/2010-04-15/create_event.json",
-  "applications": [
-    {
-      "applicationName": "web-referral",
-      "options": {
-        "service_key": "xxxxxxxxxxxxxxxx",
-        "event_type": "trigger",
-        "description": "",
-        "incident_key": "",
-        "client": "",
-        "client_url": "",
-        "details": {},
-        "contexts": [{
-          "type": "",
-          "href": "",
-          "text": ""
-        }]
-      },
-      "templates": {
-        "failed": "%s"
-      }
-    }
-  ]
-}
-```
-Example below is for slack notifications:
-```json
-{
-  "slackApi": {
-    "webhook": "https://hooks.slack.com/services/00000/0000000/XXXXXXXXXXXX"
-  },
-  "applications": [{
-    "applicationName": "web-referral",
-    "channels": [{
-      "username": "LambdaNotify",
-      "channel": "#channelName",
-      "icon_emoji": ":robot_face:"
-    }],
-    "templates": [{
-      "status": "failed",
-      "template": ":-1: Deployment (%s) of %s with revision %s to %s failed with error message \"%s\"."
-    }, {
-      "status": "created",
-      "template": ":wave: Deployment (%s) of %s with revision %s to %s has started."
-    }, {
-      "status": "succeeded",
-      "template": ":+1: Deployment (%s) of %s with revision %s to %s was successful."
-    }, {
-      "status": "stopped",
-      "template": ":ok_hand: Deployment (%s) of %s with revision %s to %s has finished."
-    }, {
-      "status": "unknown",
-      "template": ":question: Deployment (%s) of %s with revision %s to %s with status %s."
-    }, {
-      "status": "user",
-      "template": "Deployment by :bust_in_silhouette: %s."
-    }]
-  }]
-}
-```
+Example for notification configs:
+
+ - (hipchat)[https://github.com/karlnorling/lyssna/blob/master/config/hipchat-example.json]
+ - (slack)[https://github.com/karlnorling/lyssna/blob/master/config/slack-example.json]
+ - (pagerduty)[https://github.com/karlnorling/lyssna/blob/master/config/pagerduty-example.json]
+ - (newrelic)[https://github.com/karlnorling/lyssna/blob/master/config/newrelic-example.json]

@@ -1,0 +1,20 @@
+{
+  "Records": [{
+    "EventSource": "aws:sns",
+    "EventVersion": "1.0",
+    "EventSubscriptionArn": "arn:aws:sns:us-east-1:905260852223:hipchat_notification:49343f9b-237f-4ff5-9e3f-0da23ffde19e",
+    "Sns": {
+      "Type": "Notification",
+      "MessageId": "45c8b1bf-9d80-5274-b22a-fedd5a1b48d1",
+      "TopicArn": "arn:aws:sns:us-east-1:905260852223:hipchat_notification",
+      "Subject": "CREATED: AWS CodeDeploy d-KMJOV59NE in us-east-1 to web-referral",
+      "Message": "{\"region\":\"us-east-1\",\"accountId\":\"905260852223\",\"eventTriggerName\":\"BackOffice Notification\",\"applicationName\":\"web-referral\",\"deploymentId\":\"d-KMJOV59NE\",\"deploymentGroupName\":\"production\",\"createTime\":\"Wed Mar 16 02:30:50 UTC 2016\",\"completeTime\":null,\"status\":\"CREATED\"}",
+      "Timestamp": "2016-03-16T02:30:51.405Z",
+      "SignatureVersion": "1",
+      "Signature": "Fc18UP+tJisMYmzuOjVtNN2t+qzVCrqgUq9EvUBY82NwMf0LgxlSp8FM9uxFQRnlJaahxDykUyPYPNHPmLcox5A13fiudw7miKYlKRaaKobmdPQoY+lVKvm6hBpq0CKUG64YUQgHeXDuk1mUqE0L+hxj9rqJc6yZdRL96KpNLnMX3VRKw8+WELgycjJsywbaSjFqdDm2cXv76Ngwq+blYkAP5uneIzVkCHvNMsqA0iRug3yTxonV+Soz9p5b+OzJw75SaYgJqWLaGneeYqck6Vun88etssdNpbaVV0iCR600JA+lhyP7py6ON9+Z5IUtnsESB0+YJ8L59Ycvn78B9A==",
+      "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem",
+      "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:905260852223:hipchat_notification:49343f9b-237f-4ff5-9e3f-0da23ffde19e",
+      "MessageAttributes": {}
+    }
+  }]
+}
