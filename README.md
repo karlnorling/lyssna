@@ -39,8 +39,8 @@ GitHub Api - getting more information based on the commit SHA - for deployment d
 
 ### Upcoming features:
 -----
-Build system: Implement npm build to generate lambda function in aws, upload lambda js code to configures [S3](https://aws.amazon.com/documentation/s3/) and create sns topic/subscribers for applicaitons in CodeDeploy based on CloudFormation template.
-Upload system: Upload application configuration and channel configuration files to configured S3 bucket in AWS
+1. npm build to create zip file of JavaScript code and upload it to configured s3 location.
+2. Create Lambda function based on the uploaded zip file, create SNS Topic and IAM roles with permission, add triggers to CodeDeploy applications - all via CloudFormation templates.
 
 ### SNS CodeDeploy event examples
 -----
