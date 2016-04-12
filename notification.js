@@ -82,8 +82,8 @@ exports.handler = function (event, context) {
       return
     }
 
-    console.log("Sns", record.Sns)
-    console.log("Sns.Message", record.Sns.Message)
+    console.log("Sns", JSON.parse(record.Sns))
+    console.log("Sns.Message", JSON.parse(record.Sns.Message))
 
     var sns = record.Sns
     var snsMessage = JSON.parse(sns.Message)
