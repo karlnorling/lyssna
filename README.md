@@ -44,10 +44,10 @@ Upload system: Upload application configuration and channel configuration files 
 
 ### SNS CodeDeploy event examples
 -----
- - (created)[https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-created.json]
- - (succeeded)[https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-succeeded.json]
- - (failed)[https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-failed.json]
- - (stopped)[https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-stopped.json]
+ - [created](https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-created.json)
+ - [succeeded](https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-succeeded.json)
+ - [failed](https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-failed.json)
+ - [stopped](https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-stopped.json)
 
 ## Configuration
 
@@ -62,7 +62,7 @@ These json files are stored in S3. Location is based on configuration from confi
 -----
 Example for notification configs:
 
- - (hipchat)[https://github.com/karlnorling/lyssna/blob/master/config/hipchat-example.json]
- - (slack)[https://github.com/karlnorling/lyssna/blob/master/config/slack-example.json]
- - (pagerduty)[https://github.com/karlnorling/lyssna/blob/master/config/pagerduty-example.json]
- - (newrelic)[https://github.com/karlnorling/lyssna/blob/master/config/newrelic-example.json]
+ - [hipchat](https://github.com/karlnorling/lyssna/blob/master/config/hipchat-example.json)
+ - [slack](https://github.com/karlnorling/lyssna/blob/master/config/slack-example.json)
+ - [pagerduty](https://github.com/karlnorling/lyssna/blob/master/config/pagerduty-example.json)
+ - [newrelic](https://github.com/karlnorling/lyssna/blob/master/config/newrelic-example.json)
