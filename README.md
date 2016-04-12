@@ -30,6 +30,15 @@ Example for notification configs:
  - [pagerduty](https://github.com/karlnorling/lyssna/blob/master/config/pagerduty-example.json)
  - [newrelic](https://github.com/karlnorling/lyssna/blob/master/config/newrelic-example.json)
 
+
+### Deployer information
+----
+How do I know whom started the deploy?
+Right now there's no user information in the CodeDeploy SNS event.
+We can work around this by adding meta tags to the file in S3 that's getting deployed. That way we can get some user information.
+
+Add a meta tag on the S3 object with the key of: **x-amz-meta-user**. The value should be whatever the user is that you want to be associated with the deploy.
+
 ### Supported notification channels:
 -----
  - [hipchat](https://hipchat.com)
