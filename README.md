@@ -13,6 +13,22 @@ How does it work?
 
 How does one create the SNS triggers, instructions can be found [here](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
 
+## Configuration
+
+To setup the triggers for notifications we need to configure what sns events to trigger on.
+
+These json files are stored in S3. Location is based on configuration from config/app.json
+
+(Example of app configuration)[https://github.com/karlnorling/lyssna/blob/master/config/app-example.json]
+
+#### Notification channel config example (to be stored in S3) encrypted bucket)
+-----
+Example for notification configs:
+
+ - [hipchat](https://github.com/karlnorling/lyssna/blob/master/config/hipchat-example.json)
+ - [slack](https://github.com/karlnorling/lyssna/blob/master/config/slack-example.json)
+ - [pagerduty](https://github.com/karlnorling/lyssna/blob/master/config/pagerduty-example.json)
+ - [newrelic](https://github.com/karlnorling/lyssna/blob/master/config/newrelic-example.json)
 
 ### Supported notification channels:
 -----
@@ -48,21 +64,3 @@ GitHub Api - getting more information based on the commit SHA - for deployment d
  - [succeeded](https://github.com/karlnorling/lyssna/blob/master/tests/mock/codedeploy-succeeded.json)
  - [failed](https://github.com/karlnorling/lyssna/blob/master/tests/mock/codedeploy-failed.json)
  - [stopped](https://github.com/karlnorling/lyssna/blob/master/tests/mock/codedeploy-stopped.json)
-
-## Configuration
-
-To setup the triggers for notifications we need to configure what sns events to trigger on.
-
-These json files are stored in S3. Location is based on configuration from config/app.json
-
-(Example of app configuration)[https://github.com/karlnorling/lyssna/blob/master/config/app-example.json]
-
-
-#### Notification channel config example (to be stored in S3) encrypted bucket)
------
-Example for notification configs:
-
- - [hipchat](https://github.com/karlnorling/lyssna/blob/master/config/hipchat-example.json)
- - [slack](https://github.com/karlnorling/lyssna/blob/master/config/slack-example.json)
- - [pagerduty](https://github.com/karlnorling/lyssna/blob/master/config/pagerduty-example.json)
- - [newrelic](https://github.com/karlnorling/lyssna/blob/master/config/newrelic-example.json)
