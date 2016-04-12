@@ -71,6 +71,20 @@ exports.handler = function (event, context) {
       context.fail(util.format('No records in event: %s', event.type))
       return
     }
+
+    if (!record.Sns) {
+      context.fail(util.format('No Sns in record for event: %s', event.type))
+      return
+    }
+
+    if (!record.Sns.Message) {
+      context.fail(util.format('No Message in Sns record for event: %s', event.type))
+      return
+    }
+
+    console.log("Sns", record.Sns)
+    console.log("Sns.Message", record.Sns.Message)
+
     var sns = record.Sns
     var snsMessage = JSON.parse(sns.Message)
     var trigger = appConfig.snsEventTriggers[snsMessage.eventTriggerName]
