@@ -44,10 +44,10 @@ Upload system: Upload application configuration and channel configuration files 
 
 ### SNS CodeDeploy event examples
 -----
- - [created](https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-created.json)
- - [succeeded](https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-succeeded.json)
- - [failed](https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-failed.json)
- - [stopped](https://github.com/karlnorling/lyssna/blob/master/test/mock/codedeploy-stopped.json)
+ - [created](https://github.com/karlnorling/lyssna/blob/master/tests/mock/codedeploy-created.json)
+ - [succeeded](https://github.com/karlnorling/lyssna/blob/master/tests/mock/codedeploy-succeeded.json)
+ - [failed](https://github.com/karlnorling/lyssna/blob/master/tests/mock/codedeploy-failed.json)
+ - [stopped](https://github.com/karlnorling/lyssna/blob/master/tests/mock/codedeploy-stopped.json)
 
 ## Configuration
 
