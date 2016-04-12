@@ -13,8 +13,6 @@ var appConfig = require('./config/app.json')
 exports.handler = function (event, context) {
   var awsHelper = new AwsLib(context)
 
-  console.log('Appconfig', appConfig)
-
   var getRevisionData = function (snsMessage) {
     var deploymentId = snsMessage.deploymentId
     var awsRequest = awsHelper.getDeploymentDetails(deploymentId)
@@ -78,7 +76,7 @@ exports.handler = function (event, context) {
     var trigger = appConfig.snsEventTriggers[snsMessage.eventTriggerName]
     var deploymentId = snsMessage.deploymentId
 
-    console.log("snsMessage", snsMessage)
+    console.log("sns.Message", sns.Message)
 
     if (!trigger) {
       context.fail(util.format('Unsupported sns event trigger name: %s', snsMessage.eventTriggerName))
