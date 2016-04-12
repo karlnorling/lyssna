@@ -76,7 +76,7 @@ exports.handler = function (event, context) {
     var trigger = appConfig.snsEventTriggers[snsMessage.eventTriggerName]
     var deploymentId = snsMessage.deploymentId
 
-    console.log("sns.Message", sns.Message)
+    console.log('sns.Message', sns.Message)
 
     if (!trigger) {
       context.fail(util.format('Unsupported sns event trigger name: %s', snsMessage.eventTriggerName))

@@ -1,0 +1,44 @@
+{
+  "apiKey": "xxxxxx",
+  "pagerDutyApiUri": "https://events.pagerduty.com/generic/2010-04-15/create_event.json",
+  "applications": [{
+    "applicationName": "web-referral",
+    "options": {
+      "service_key": "xxxx",
+      "event_type": "trigger",
+      "description": "",
+      "incident_key": "",
+      "client": "",
+      "client_url": "",
+      "details": {},
+      "contexts": [{
+        "type": "",
+        "href": "",
+        "text": ""
+      }]
+    },
+    "templates": {
+      "failed": "%s"
+    }
+  }, {
+    "applicationName": "api-referral",
+    "options": {
+      "service_key": "xxx",
+      "event_type": "trigger",
+      "description": "",
+      "incident_key": "",
+      "client": "",
+      "client_url": "",
+      "details": {},
+      "contexts": [{
+        "type": "",
+        "href": "",
+        "text": ""
+      }]
+    },
+    "templates": {
+      "failed": "%s"
+    }
+  }],
+  "version": "0.0.1"
+}

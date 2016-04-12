@@ -1,0 +1,59 @@
+{
+  "slackApi": {
+    "webhook": "https://hooks.slack.com/services/xxxx/xxx/CuHapqXFbdejKYewWTPIEoKO"
+  },
+  "applications": [{
+    "applicationName": "web-referral",
+    "channels": [{
+      "username": "LambdaNotify",
+      "channel": "#codedeploy",
+      "icon_emoji": ":robot_face:"
+    }],
+    "templates": [{
+      "status": "failed",
+      "template": ":-1: D  Deployment (%s) of %s with revision %s to %s failed with error code \"%s\" and error message \"%s\"."
+    }, {
+      "status": "created",
+      "template": ":wave: Deployment (%s) of %s with revision %s to %s has started."
+    }, {
+      "status": "succeeded",
+      "template": ":+1: Deployment (%s) of %s with revision %s to %s was successful."
+    }, {
+      "status": "stopped",
+      "template": ":ok_hand: Deployment (%s) of %s with revision %s to %s has finished."
+    }, {
+      "status": "unknown",
+      "template": ":question: Deployment (%s) of %s with revision %s to %s with status %s."
+    }, {
+      "status": "user",
+      "template": "Deployment by :bust_in_silhouette: %s."
+    }]
+  }, {
+    "applicationName": "api-referral",
+    "channels": [{
+      "username": "LambdaNotify",
+      "channel": "#codedeploy",
+      "icon_emoji": ":robot_face:"
+    }],
+    "templates": [{
+      "status": "failed",
+      "template": ":-1: D  Deployment (%s) of %s with revision %s to %s failed with error code \"%s\" and error message \"%s\"."
+    }, {
+      "status": "created",
+      "template": ":wave: Deployment (%s) of %s with revision %s to %s has started."
+    }, {
+      "status": "succeeded",
+      "template": ":+1: Deployment (%s) of %s with revision %s to %s was successful."
+    }, {
+      "status": "stopped",
+      "template": ":ok_hand: Deployment (%s) of %s with revision %s to %s has finished."
+    }, {
+      "status": "unknown",
+      "template": ":question: Deployment (%s) of %s with revision %s to %s with status %s."
+    }, {
+      "status": "user",
+      "template": "Deployment by :bust_in_silhouette: %s."
+    }]
+  }],
+  "version": "0.0.1"
+}
