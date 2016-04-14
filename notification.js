@@ -66,19 +66,20 @@ exports.handler = function (event, context) {
     return
   }
 
+  if (!event.Records) {
+    context.fail(util.format('No records in event: %s', event))
+    return
+  }
+
   _.each(event.Records, function (record) {
-    if (!record) {
-      context.fail(util.format('No records in event: %s', event.type))
-      return
-    }
 
     if (!record.Sns) {
-      context.fail(util.format('No Sns in record for event: %s', event.type))
+      context.fail(util.format('No Sns in record for event: %s', event))
       return
     }
 
     if (!record.Sns.Message) {
-      context.fail(util.format('No Message in Sns record for event: %s', event.type))
+      context.fail(util.format('No Message in Sns record for event: %s', event))
       return
     }
 
