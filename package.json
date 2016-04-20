@@ -4,7 +4,7 @@
   "author": "Karl Norling <karl.whatever@gmail.com>",
   "scripts": {
     "lint": "standard",
-    "test": "node test/aws.js"
+    "test": "mocha test/"
   },
   "standard": {
     "globals": [
@@ -12,6 +12,7 @@
     ]
   },
   "dependencies": {
+    "archiver": "^1.0.0",
     "aws-sdk": "^2.2.42",
     "jsdoc": "^3.4.0",
     "node-hipchat": "^0.4.5",

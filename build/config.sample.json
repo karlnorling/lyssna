@@ -1,0 +1,26 @@
+{
+  "lambda": {
+    "s3": {
+      "bucket": "s3.bucket/name",
+      "key": "path/to/file/in/s3"
+    },
+    "description": "An Amazon SNS trigger that logs the message pushed to the SNS topic."
+  },
+  "configs": {
+    "s3": {
+      "bucket": "s3.bucket/name",
+      "key": "path/to/file/in/s3.json"
+    }
+  },
+  "archive": {
+    "files": [
+      "config/app.json",
+      "lib/",
+      "node_modules/",
+      "notification.js",
+      "package.json",
+      "README.md"
+    ]
+  },
+  "version": "0.0.1"
+}
