@@ -19,14 +19,15 @@ var getStream = function (fileName) {
 }
 
 for( i=0; i < fileNames.length; i++) {
-  var path = basePath + fileNames[i]
+  var fileName = fileNames[i]
+  var path = basePath + fileName
 
   console.log('Zipping: ' + path)
 
   if (fs.statSync(path).isDirectory()) {
-    archive.directory(path, path, { name: fileNames[i]})
+    archive.directory(path, path, { name: fileName })
   } else {
-    archive.append(getStream(path), { name: fileNames[i]})
+    archive.append(getStream(path), { name: fileName })
   }
 }
 
