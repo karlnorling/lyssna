@@ -60,6 +60,7 @@ Add a meta tag on the S3 object with the key of: **x-amz-meta-user**. The value 
 
 ### Upcoming integrations:
 -----
+SNS CloudWatch alarms - adding support to notify on CloudWatch alarms.
 GitHub Api - getting more information based on the commit SHA - for deployment details.
 
 ### Upcoming features:
