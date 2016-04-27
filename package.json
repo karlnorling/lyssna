@@ -1,7 +1,16 @@
 {
   "name": "hipchat-notification",
   "description": "AWS Lambda SNS event subscriber that publishes SNS events to configurable notification channels based on SNS event triggers.",
-  "author": "Karl Norling <karl.whatever@gmail.com>",
+  "author": {
+    "name": "Karl Norling",
+    "email": "karl.whatever@gmail.com"
+  },
+  "homepage": "https://github.com/karlnorling/lyssna",
+  "keywords": ["aws", "sns", "lambda", "codedeploy", "s3", "notification", "config", "hipchat", "slack", "pagerduty", "newrelic", "alert", "messaging"],
+  "bugs": {
+    "url": "https://github.com/karlnorling/lyssna/issues"
+  },
+  "license": "SEE LICENSE IN <LICENSE>",
   "scripts": {
     "lint": "standard",
     "test": "mocha test/"
@@ -24,5 +33,6 @@
   },
   "devDependencies": {
     "standard": "^6.0.8"
-  }
+  },
+  "version": "0.0.1"
 }

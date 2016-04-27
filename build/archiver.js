@@ -2,8 +2,9 @@ var archiver = require('archiver')
 var archive  = archiver('zip')
 var config = require('./config.json')
 var fs = require('fs')
+var packageConfig = require('./../package.json')
+var version = packageConfig.version
 
-var version = config.lambda.version
 var output = fs.createWriteStream('./lyssna-' + version +'.zip')
 var fileNames = config.archive.files
 var basePath =  './'
@@ -18,7 +19,7 @@ var getStream = function (fileName) {
   return fs.readFileSync(fileName)
 }
 
-for( i=0; i < fileNames.length; i++) {
+for( i = 0; i < fileNames.length; i++) {
   var fileName = fileNames[i]
   var path = basePath + fileName
 
