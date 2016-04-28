@@ -22,7 +22,8 @@ function uploadConfigs (config) {
   _.each(s3Config.files, function (file) {
     var params = {
       Bucket: s3Config.s3.bucket,
-      Key: s3Config.s3.key + file.name + '-' + version + '.json'
+      Key: s3Config.s3.key + file.name + '-' + version + '.json',
+      Body: require(file.local_path)
     }
     handleFileCheckResult(fileCheck(params), params)
   })
