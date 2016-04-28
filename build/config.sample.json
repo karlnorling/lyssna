@@ -9,8 +9,21 @@
   "configs": {
     "s3": {
       "bucket": "s3.bucket/name",
-      "key": "path/to/file/in/s3.json"
-    }
+      "key": "path/to/save/file/in/s3.json"
+    },
+    "files": [{
+      "name": "hipchat",
+      "local_path": "./path/to/config/file/hipchat.json"
+    }, {
+      "name": "newrelic",
+      "local_path": "/path/to/config/file/newrelic.json"
+    }, {
+      "name": "pagerduty",
+      "local_path": "/path/to/config/file/pagerduty.json"
+    }, {
+      "name": "slack",
+      "local_path": "/path/to/config/file/slack.json"
+    }]
   },
   "archive": {
     "files": [
