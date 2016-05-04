@@ -1,33 +1,30 @@
 {
   "apiKey": "xxxxxx",
   "applications": [{
-    "applicationName": "web-referral",
+    "applicationName": "(.*)",
     "rooms": [{
-      "userName": "LambdaNotify",
+      "userName": "Lyssna",
       "id": "611853"
     }],
-    "templates": {
-      "failed": "Deployment (%s) of %s with revision %s to %s failed with error code \"%s\" and error message \"%s\".",
-      "created": "Deployment (%s) of %s with revision %s to %s has started.",
-      "succeeded": "Deployment (%s) of %s with revision %s to %s was successful.",
-      "stopped": "Deployment (%s) of %s with revision %s to %s has finished.",
-      "unknown": "Deployment (%s) of %s with revision %s to %s with status %s.",
-      "user": "Deployment by %s."
-    }
-  }, {
-    "applicationName": "api-referral",
-    "rooms": [{
-      "userName": "LambdaNotify",
-      "id": "611853"
-    }],
-    "templates": {
-      "failed": "Deployment (%s) of %s with revision %s to %s failed with error code \"%s\" and error message \"%s\".",
-      "created": "Deployment (%s) of %s with revision %s to %s has started.",
-      "succeeded": "Deployment (%s) of %s with revision %s to %s was successful.",
-      "stopped": "Deployment (%s) of %s with revision %s to %s has finished.",
-      "unknown": "Deployment (%s) of %s with revision %s to %s with status %s.",
-      "user": "Deployment by %s."
-    }
-  }],
-  "version": "0.0.1"
+    "templates": [{
+      "status": "failed",
+      "color": "red",
+      "template": "Deployment (%s) of %s with revision %s to %s failed with error code \"%s\" and error message \"%s\"."
+    }, {
+      "status": "created",
+      "color": "yellow",
+      "template": "Deployment (%s) of %s with revision %s to %s has started."
+    }, {
+      "status": "succeeded",
+      "color": "green",
+      "template": "Deployment (%s) of %s with revision %s to %s has started."
+    }, {
+      "status": "stopped",
+      "color": "gray",
+      "template": "Deployment (%s) of %s with revision %s to %s was stopped."
+    }, {
+      "status": "user",
+      "template": "Deployment by %s"
+    }]
+  }]
 }

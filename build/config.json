@@ -1,5 +1,6 @@
 {
   "lambda": {
+    "name": "BackofficeHipchatNotification",
     "s3": {
       "bucket": "com.gilt.lambda.backoffice",
       "key": "codedeploy/notifications/app"
@@ -9,8 +10,21 @@
   "configs": {
     "s3": {
       "bucket": "com.gilt.lambda.backoffice",
-      "key": "codedeploy/notifications/config"
-    }
+      "key": "codedeploy/notifications/config/"
+    },
+    "files": [{
+      "name": "hipchat",
+      "local_path": "./config/s3/hipchat.json"
+    }, {
+      "name": "newrelic",
+      "local_path": "./config/s3/newrelic.json"
+    }, {
+      "name": "pagerduty",
+      "local_path": "./config/s3/pagerduty.json"
+    }, {
+      "name": "slack",
+      "local_path": "./config/s3/slack.json"
+    }]
   },
   "archive": {
     "files": [
@@ -21,6 +35,5 @@
       "package.json",
       "README.md"
     ]
-  },
-  "version": "0.0.1"
+  }
 }

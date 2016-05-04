@@ -51,19 +51,40 @@ exports.handler = function (event, context) {
 
   var parseS3Key = function (s3Location) {
     var re = /(\d+\.)?(\d+\.)?(\*|\d+)/
-    var str = s3Location.key
     var m
     var revision
 
-    if ((m = re.exec(str)) !== null) {
+    if ((m = re.exec(s3Location.key)) !== null) {
       if (m.index === re.lastIndex) {
         re.lastIndex++
       }
-      revision = revision = m[0]
+      revision = m[0]
       return revision
     }
     console.warn(util.format('No revision found for s3Location: "%s"', s3Location.key))
     return
+  }
+
+  var getTrigger = function (snsMessage) {
+    var configs = []
+    _.each(appConfig.snsEventTriggers, function (config) {
+      var re = new RegExp(config.name, 'g')
+      var m
+
+      if ((m = re.exec(snsMessage.eventTriggerName)) !== null) {
+        if (m.index === re.lastIndex) {
+          re.lastIndex++
+        }
+        configs.push(config)
+      }
+    })
+
+    if (configs.length === 0) {
+      context.fail(util.format('Unsupported sns event trigger name: %s', snsMessage.eventTriggerName))
+      return
+    }
+
+    return configs
   }
 
   if (!event.Records) {
@@ -72,7 +93,6 @@ exports.handler = function (event, context) {
   }
 
   _.each(event.Records, function (record) {
-
     if (!record.Sns) {
       context.fail(util.format('No Sns in record for event: %s', event))
       return
@@ -83,98 +103,99 @@ exports.handler = function (event, context) {
       return
     }
 
-    console.log("Sns", record.Sns)
-    console.log("Sns.Message", JSON.parse(record.Sns.Message))
+    console.log('Sns', record.Sns)
+    console.log('Sns.Message', JSON.parse(record.Sns.Message))
 
     var sns = record.Sns
     var snsMessage = JSON.parse(sns.Message)
-    var trigger = appConfig.snsEventTriggers[snsMessage.eventTriggerName]
+    var triggers = getTrigger(snsMessage)
     var deploymentId = snsMessage.deploymentId
 
-    if (!trigger) {
-      context.fail(util.format('Unsupported sns event trigger name: %s', snsMessage.eventTriggerName))
-      return
+    if (triggers && triggers.length > 0) {
+      console.log(util.format('Found triggers: %s', JSON.stringify(triggers)))
     }
 
     var revisionPromise = getRevisionData(snsMessage)
 
-    _.each(trigger, function (channel, key) {
-      switch (key) {
-        case 'hipchat':
-          var hipchatConfigPromise = awsHelper.getNotificationConfig(channel.s3)
+    _.each(triggers, function (trigger) {
+      _.each(trigger.channels, function (channel, key) {
+        switch (key) {
+          case 'hipchat':
+            var hipchatConfigPromise = awsHelper.getNotificationConfig(channel.s3)
 
-          Promise.all([hipchatConfigPromise, revisionPromise]).then(function (values) {
-            var hipchatApi = new HipchatLib(values[0], context)
-            var revision = getRevisionNumber(values[1], deploymentId)
-            var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
+            Promise.all([hipchatConfigPromise, revisionPromise]).then(function (values) {
+              var hipchatApi = new HipchatLib(values[0], context)
+              var revision = getRevisionNumber(values[1], deploymentId)
+              var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
-            metaTagsPromise.then(function (metaTags) {
-              // Function call below can be a callback.
-              hipchatApi.sendNotification(snsMessage, revision, metaTags)
+              metaTagsPromise.then(function (metaTags) {
+                // Function call below can be a callback.
+                hipchatApi.sendNotification(snsMessage, revision, metaTags.user)
+              }).catch(function (err) {
+                context.fail(util.format('Error: "%s"', err))
+              })
             }).catch(function (err) {
               context.fail(util.format('Error: "%s"', err))
             })
-          }).catch(function (err) {
-            context.fail(util.format('Error: "%s"', err))
-          })
-          break
-        case 'newrelic':
-          var newrelicConfigPromise = awsHelper.getNotificationConfig(channel.s3)
+            break
+          case 'newrelic':
+            var newrelicConfigPromise = awsHelper.getNotificationConfig(channel.s3)
 
-          Promise.all([newrelicConfigPromise, revisionPromise]).then(function (values) {
-            var newrelicApi = new NewrelicLib(values[0], context)
-            var revision = getRevisionNumber(values[1], deploymentId)
-            var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
+            Promise.all([newrelicConfigPromise, revisionPromise]).then(function (values) {
+              var newrelicApi = new NewrelicLib(values[0], context)
+              var revision = getRevisionNumber(values[1], deploymentId)
+              var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
-            metaTagsPromise.then(function (metaTags) {
-              // Function call below can be a callback.
-              newrelicApi.recordDeploymentToNewrelic(sns, metaTags.user || '', revision)
+              metaTagsPromise.then(function (metaTags) {
+                // Function call below can be a callback.
+                newrelicApi.recordDeploymentToNewrelic(sns, metaTags.user || '', revision)
+              }).catch(function (err) {
+                context.fail(util.format('Error: "%s"', err))
+              })
             }).catch(function (err) {
               context.fail(util.format('Error: "%s"', err))
             })
-          }).catch(function (err) {
-            context.fail(util.format('Error: "%s"', err))
-          })
-          break
-        case 'pagerduty':
-          var pagerdutyConfigPromise = awsHelper.getNotificationConfig(channel.s3)
+            break
+          case 'pagerduty':
+            var pagerdutyConfigPromise = awsHelper.getNotificationConfig(channel.s3)
 
-          Promise.all([pagerdutyConfigPromise, revisionPromise]).then(function (values) {
-            var pagerdutyLib = new PagerdutyLib(values[0], context)
-            var revision = getRevisionNumber(values[1], deploymentId)
-            var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
+            Promise.all([pagerdutyConfigPromise, revisionPromise]).then(function (values) {
+              var pagerdutyLib = new PagerdutyLib(values[0], context)
+              var revision = getRevisionNumber(values[1], deploymentId)
+              var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
-            metaTagsPromise.then(function (metaTags) {
-              // Function call below can be a callback.
-              pagerdutyLib.triggerPagerDutyAlert(sns, metaTags.user || '', revision)
+              metaTagsPromise.then(function (metaTags) {
+                // Function call below can be a callback.
+                pagerdutyLib.triggerPagerDutyAlert(sns, metaTags.user || '', revision)
+              }).catch(function (err) {
+                context.fail(util.format('Error: "%s"', err))
+              })
             }).catch(function (err) {
               context.fail(util.format('Error: "%s"', err))
             })
-          }).catch(function (err) {
-            context.fail(util.format('Error: "%s"', err))
-          })
-          break
-        case 'slack':
-          var slackConfigPromise = awsHelper.getNotificationConfig(channel.s3)
+            break
+          case 'slack':
+            var slackConfigPromise = awsHelper.getNotificationConfig(channel.s3)
 
-          Promise.all([slackConfigPromise, revisionPromise]).then(function (values) {
-            var slackLib = new SlackLib(values[0], context)
-            var revision = getRevisionNumber(values[1], deploymentId)
-            var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
+            Promise.all([slackConfigPromise, revisionPromise]).then(function (values) {
+              var slackLib = new SlackLib(values[0], context)
+              var revision = getRevisionNumber(values[1], deploymentId)
+              var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
-            metaTagsPromise.then(function (metaTags) {
-              // Function call below can be a callback.
-              slackLib.postMessage(snsMessage, metaTags.user || '', revision)
+              metaTagsPromise.then(function (metaTags) {
+                // Function call below can be a callback.
+                slackLib.postMessage(snsMessage, metaTags.user || '', revision)
+              }).catch(function (err) {
+                context.fail(util.format('Error: "%s"', err))
+              })
             }).catch(function (err) {
               context.fail(util.format('Error: "%s"', err))
             })
-          }).catch(function (err) {
-            context.fail(util.format('Error: "%s"', err))
-          })
-          break
-        default:
-          context.fail(util.format('Unsupported notification channel: %s', key))
-      }
+            break
+          default:
+            context.fail(util.format('Unsupported notification channel: %s', key))
+        }
+      })
     })
   })
 }

@@ -1,5 +1,6 @@
 {
   "lambda": {
+    "name": "LambdaFunctionName",
     "s3": {
       "bucket": "s3.bucket/name",
       "key": "path/to/file/in/s3"
