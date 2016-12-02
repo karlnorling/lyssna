@@ -56,12 +56,7 @@ Add a meta tag on the S3 object with the key of: **x-amz-meta-user**. The value 
 ### Upcoming notification channels:
 -----
  - [jira](https://jira.com)
- - [grove](https://grove.io)
- - [Bitrix24](https://bitrix24.com)
- - [yammer](https://www.yammer.com/)
- - [fleep](https://fleep.io)
- - [glitter](https://gitter.im/)
- - [glip](https://glip.com)
+ - [asana](https://asana.com)
 
 ### Upcoming integrations:
 -----
