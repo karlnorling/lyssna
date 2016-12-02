@@ -8,18 +8,25 @@ Lyssna takes these events and matches them with provided notification channels, 
 How does it work?
 
 1. The CodeDeploy publishes deploy event to a SNS topic.
-2. Subscibers to that SNS topic - in this case Lyssna Lambda function - will execute.
+2. Subscribers to that SNS topic - in this case Lyssna Lambda function - will execute.
 3. During execution it looks at the SNS Event trigger name, SNS message application name and based on channel configurations sends a notification to these channels.
 
 How does one create the SNS triggers, instructions can be found [here](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
 
 ## Configuration
 
-To setup the triggers for notifications we need to configure what sns events to trigger on.
+To setup the triggers for notifications we need to configure which SNS events to trigger on.
 
 These json files are stored in S3. Location is based on configuration from config/app.json
 
 (Example of app configuration)[https://github.com/karlnorling/lyssna/blob/master/config/app-example.json]
+
+### To create configuration files and bundle app for upload:
+
+1. Create a `s3` folder inside `./config`
+2. Create configuration files based on examples in `./config`
+3. In `./build` create a `config.json` file based on the example `config.sample.json` file.
+4. Run `node build/archiver.js` - this will create a `lyssna-VERSION_NUMBER.zip` file.
 
 #### Notification channel config example (to be stored in S3) encrypted bucket)
 -----
@@ -63,7 +70,7 @@ GitHub Api - getting more information based on the commit SHA - for deployment d
 
 ### Upcoming features:
 -----
-1. npm build to create zip file of JavaScript code and upload it to configured s3 location.
+1. Upload functionality to s3 based on configured location.
 2. Create Lambda function based on the uploaded zip file, create SNS Topic and IAM roles with permission, add triggers to CodeDeploy applications - all via CloudFormation templates.
 
 ### SNS CodeDeploy event examples

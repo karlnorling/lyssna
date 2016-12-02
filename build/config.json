@@ -1,29 +1,20 @@
 {
   "lambda": {
-    "name": "BackofficeHipchatNotification",
+    "name": "LambdaFunctionName",
     "s3": {
-      "bucket": "com.gilt.lambda.backoffice",
-      "key": "codedeploy/notifications/app"
+      "bucket": "s3.bucket/name",
+      "key": "path/to/file/in/s3"
     },
     "description": "An Amazon SNS trigger that logs the message pushed to the SNS topic."
   },
   "configs": {
     "s3": {
-      "bucket": "com.gilt.lambda.backoffice",
-      "key": "codedeploy/notifications/config/"
+      "bucket": "codedeploy/notifications/config/",
+      "key": "config/s3/slack.json"
     },
     "files": [{
-      "name": "hipchat",
-      "local_path": "./config/s3/hipchat.json"
-    }, {
-      "name": "newrelic",
-      "local_path": "./config/s3/newrelic.json"
-    }, {
-      "name": "pagerduty",
-      "local_path": "./config/s3/pagerduty.json"
-    }, {
       "name": "slack",
-      "local_path": "./config/s3/slack.json"
+      "local_path": "/path/to/config/file/slack.json"
     }]
   },
   "archive": {
