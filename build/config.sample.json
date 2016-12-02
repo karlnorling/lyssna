@@ -14,16 +14,16 @@
     },
     "files": [{
       "name": "hipchat",
-      "local_path": "/config/file/hipchat.json"
+      "local_path": "./config/hipchat.json"
     }, {
       "name": "newrelic",
-      "local_path": "/config/file/newrelic.json"
+      "local_path": "./config/newrelic.json"
     }, {
       "name": "pagerduty",
-      "local_path": "/config/file/pagerduty.json"
+      "local_path": "./config/pagerduty.json"
     }, {
       "name": "slack",
-      "local_path": "/config/file/slack.json"
+      "local_path": "./config/slack.json"
     }]
   },
   "archive": {

@@ -14,7 +14,7 @@
     },
     "files": [{
       "name": "slack",
-      "local_path": "/path/to/config/file/slack.json"
+      "local_path": "./config/slack.json"
     }]
   },
   "archive": {
