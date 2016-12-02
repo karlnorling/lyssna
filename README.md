@@ -55,7 +55,7 @@ Add a meta tag on the S3 object with the key of: **x-amz-meta-user**. The value 
 
 ### Screenshots
 
-![Slack][http://imgur.com/a/e5aun]
+![Slack](http://imgur.com/a/e5aun)
 
 ### Upcoming notification channels:
 -----
