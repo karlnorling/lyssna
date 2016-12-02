@@ -55,8 +55,6 @@ Add a meta tag on the S3 object with the key of: **x-amz-meta-user**. The value 
  - [fleep](https://fleep.io)
  - [glitter](https://gitter.im/)
  - [glip](https://glip.com)
- - [ChatGrape](https://chatgrape.com/)
- - [flowdock](https://www.flowdock.com/)
 
 ### Upcoming integrations:
 -----
