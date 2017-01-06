@@ -1,6 +1,7 @@
 {
   "snsEventTriggers": [{
     "name": "String or Regexp here to match on sns event trigger name",
+    "revisionRegexp": "/(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)/",
     "channels": {
       "hipchat": {
         "s3": {

@@ -2,19 +2,19 @@
   "lambda": {
     "name": "LambdaFunctionName",
     "s3": {
-      "bucket": "s3.bucket/name",
-      "key": "path/to/file/in/s3"
+      "bucket": "qh-other",
+      "key": "lyssna/codedeploy"
     },
     "description": "An Amazon SNS trigger that logs the message pushed to the SNS topic."
   },
   "configs": {
     "s3": {
-      "bucket": "codedeploy/notifications/config/",
-      "key": "config/s3/slack.json"
+      "bucket": "qh-other",
+      "key": "lyssna/codedeploy/config/"
     },
     "files": [{
-      "name": "slack",
-      "local_path": "./config/slack.json"
+      "name": "stage-slack",
+      "local_path": "./config/s3/stage-slack.json"
     }]
   },
   "archive": {

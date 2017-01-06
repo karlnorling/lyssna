@@ -10,7 +10,7 @@
   "configs": {
     "s3": {
       "bucket": "s3.bucket/name",
-      "key": "path/to/file/in/s3.json"
+      "key": "path/to/file/"
     },
     "files": [{
       "name": "hipchat",

@@ -24,10 +24,10 @@ exports.handler = function (event, context) {
     })
   }
 
-  var getRevisionNumber = function (revision, deploymentId) {
+  var getRevisionNumber = function (regexp, revision, deploymentId) {
     switch (revision.revisionType) {
       case 'S3':
-        return parseS3Key(revision.s3Location)
+        return parseS3Key(regexp, revision.s3Location)
       case 'GitHub':
         return revision.gitHubLocation.commitId
       default:
@@ -49,8 +49,8 @@ exports.handler = function (event, context) {
     }
   }
 
-  var parseS3Key = function (s3Location) {
-    var re = /(\d+\.)?(\d+\.)?(\*|\d+)/
+  var parseS3Key = function (regexp, s3Location) {
+    var re = new RegExp(regexp, 'g');
     var m
     var revision
 
@@ -60,6 +60,8 @@ exports.handler = function (event, context) {
       }
       revision = m[0]
       return revision
+    } else { //Return the s3Location.key if no match on regexp
+      return s3Location.key;
     }
     console.warn(util.format('No revision found for s3Location: "%s"', s3Location.key))
     return
@@ -125,7 +127,7 @@ exports.handler = function (event, context) {
 
             Promise.all([hipchatConfigPromise, revisionPromise]).then(function (values) {
               var hipchatApi = new HipchatLib(values[0], context)
-              var revision = getRevisionNumber(values[1], deploymentId)
+              var revision = getRevisionNumber(trigger.regexp, values[1], deploymentId)
               var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
               metaTagsPromise.then(function (metaTags) {
@@ -143,7 +145,7 @@ exports.handler = function (event, context) {
 
             Promise.all([newrelicConfigPromise, revisionPromise]).then(function (values) {
               var newrelicApi = new NewrelicLib(values[0], context)
-              var revision = getRevisionNumber(values[1], deploymentId)
+              var revision = getRevisionNumber(trigger.regexp, values[1], deploymentId)
               var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
               metaTagsPromise.then(function (metaTags) {
@@ -161,7 +163,7 @@ exports.handler = function (event, context) {
 
             Promise.all([pagerdutyConfigPromise, revisionPromise]).then(function (values) {
               var pagerdutyLib = new PagerdutyLib(values[0], context)
-              var revision = getRevisionNumber(values[1], deploymentId)
+              var revision = getRevisionNumber(trigger.regexp, values[1], deploymentId)
               var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
               metaTagsPromise.then(function (metaTags) {
@@ -179,7 +181,7 @@ exports.handler = function (event, context) {
 
             Promise.all([slackConfigPromise, revisionPromise]).then(function (values) {
               var slackLib = new SlackLib(values[0], context)
-              var revision = getRevisionNumber(values[1], deploymentId)
+              var revision = getRevisionNumber(trigger.regexp, values[1], deploymentId)
               var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
               metaTagsPromise.then(function (metaTags) {
