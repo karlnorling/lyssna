@@ -28,6 +28,12 @@ These json files are stored in S3. Location is based on configuration from confi
 3. In `./build` create a `config.json` file based on the example `config.sample.json` file.
 4. Run `node build/archiver.js` - this will create a `lyssna-VERSION_NUMBER.zip` file.
 
+
+### Upload lambda function zip file code and configuration to S3.
+1. Based on your `./config/app.json`'s s3 configuration, use the same in s3 location in
+`./build/config.json`
+2. Run `node build.upload.js` - this will use the aws cli to upload the `lyssna-VERSION_NUMBER.zip` file and `./config/s3` files to configured s3 location set in `./build/config.json`
+
 #### Notification channel config example (to be stored in S3) encrypted bucket)
 -----
 Example for notification configs:
