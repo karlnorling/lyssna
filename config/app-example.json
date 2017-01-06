@@ -1,29 +1,29 @@
 {
   "snsEventTriggers": [{
     "name": "String or Regexp here to match on sns event trigger name",
-    "revisionRegexp": "/(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)/",
+    "revisionRegexp": "Regexp to parse the revision/version out from the s3 key.",
     "channels": {
       "hipchat": {
         "s3": {
-          "bucket": "bucket.in.s3",
+          "bucket": "bucket-name",
           "key": "path/to/hipchat.json"
         }
       },
       "newrelic": {
         "s3": {
-          "bucket": "bucket.in.s3",
+          "bucket": "bucket-name",
           "key": "path/to/newrelic.json"
         }
       },
       "pagerduty": {
         "s3": {
-          "bucket": "bucket.in.s3",
+          "bucket": "bucket-name",
           "key": "path/to/pagerduty.json"
         }
       },
       "slack": {
         "s3": {
-          "bucket": "bucket.in.s3",
+          "bucket": "bucket-name",
           "key": "path/to/slack.json"
         }
       }

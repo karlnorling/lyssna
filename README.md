@@ -19,7 +19,7 @@ To setup the triggers for notifications we need to configure which SNS events to
 
 These json files are stored in S3. Location is based on configuration from config/app.json
 
-(Example of app configuration)[https://github.com/karlnorling/lyssna/blob/master/config/app-example.json]
+[Example of app configuration](https://github.com/karlnorling/lyssna/blob/master/config/app-example.json)
 
 ### To create configuration files and bundle app for upload:
 

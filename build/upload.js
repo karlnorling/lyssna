@@ -70,11 +70,11 @@ function doFileUpload (params) {
 
 function handleFileCheckResult (promise, params) {
   promise.then(function (data) {
-    process.stdout.write(util.format('\n%s was found, will override the file.', params.Key))
+    process.stdout.write(util.format('\n%s was found, will override the file.\n', params.Key))
     doFileUpload(params)
   }).catch(function (data) {
     if (data.statusCode === 404) {
-      process.stdout.write(util.format('\n%s wasn\'t found, proceeding to upload file.', params.Key))
+      process.stdout.write(util.format('\n%s wasn\'t found, proceeding to upload file.\n', params.Key))
       doFileUpload(params)
     } else {
       console.error(data)
