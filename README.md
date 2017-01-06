@@ -79,6 +79,7 @@ GitHub Api - getting more information based on the commit SHA - for deployment d
 2. Create Lambda function based on the uploaded zip file, create SNS Topic and IAM roles with permission, add triggers to CodeDeploy applications - all via CloudFormation templates.
 
 ### SNS CodeDeploy event examples
+
 These are just examples - the best example is get a Code Deploy SNS Event from your own aws environment. This is because some data in the SNS Event is used as values for some aws cli api calls.
 -----
  - [created](https://github.com/karlnorling/lyssna/blob/master/tests/mock/codedeploy-created.json)
