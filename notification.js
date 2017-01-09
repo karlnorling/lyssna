@@ -53,7 +53,6 @@ exports.handler = function (event, context) {
     var re = new RegExp(regexp, 'g');
     var m
     var revision
-
     if ((m = re.exec(s3Location.key)) !== null) {
       if (m.index === re.lastIndex) {
         re.lastIndex++
@@ -127,7 +126,7 @@ exports.handler = function (event, context) {
 
             Promise.all([hipchatConfigPromise, revisionPromise]).then(function (values) {
               var hipchatApi = new HipchatLib(values[0], context)
-              var revision = getRevisionNumber(trigger.regexp, values[1], deploymentId)
+              var revision = getRevisionNumber(trigger.revisionRegexp, values[1], deploymentId)
               var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
               metaTagsPromise.then(function (metaTags) {
@@ -145,7 +144,7 @@ exports.handler = function (event, context) {
 
             Promise.all([newrelicConfigPromise, revisionPromise]).then(function (values) {
               var newrelicApi = new NewrelicLib(values[0], context)
-              var revision = getRevisionNumber(trigger.regexp, values[1], deploymentId)
+              var revision = getRevisionNumber(trigger.revisionRegexp, values[1], deploymentId)
               var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
               metaTagsPromise.then(function (metaTags) {
@@ -163,7 +162,7 @@ exports.handler = function (event, context) {
 
             Promise.all([pagerdutyConfigPromise, revisionPromise]).then(function (values) {
               var pagerdutyLib = new PagerdutyLib(values[0], context)
-              var revision = getRevisionNumber(trigger.regexp, values[1], deploymentId)
+              var revision = getRevisionNumber(trigger.revisionRegexp, values[1], deploymentId)
               var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
               metaTagsPromise.then(function (metaTags) {
@@ -181,7 +180,7 @@ exports.handler = function (event, context) {
 
             Promise.all([slackConfigPromise, revisionPromise]).then(function (values) {
               var slackLib = new SlackLib(values[0], context)
-              var revision = getRevisionNumber(trigger.regexp, values[1], deploymentId)
+              var revision = getRevisionNumber(trigger.revisionRegexp, values[1], deploymentId)
               var metaTagsPromise = getMetaTagsForS3Key(values[1], deploymentId)
 
               metaTagsPromise.then(function (metaTags) {
